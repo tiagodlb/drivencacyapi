@@ -33,7 +33,7 @@ export async function postChoice(req, res) {
       .findOne({ title: title });
     console.log(title, poolId);
     console.log(titleExists);
-    if (titleExists) {
+    if (titleExists && pollExists) {
       return res.sendStatus(409);
     }
 
