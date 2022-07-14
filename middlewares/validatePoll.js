@@ -1,4 +1,4 @@
-import { poolSchema } from "../schemas/pollSchema";
+import { poolSchema } from "../schemas/pollSchema.js";
 
 export function ValidatePoll(req, res, next) {
   const { error } = poolSchema.validate(req.body, { abortEarly: false });
