@@ -5,19 +5,7 @@ import db from "../src/db.js";
 
 export async function postPoll(req, res) {
   const { title, expireAt } = req.body;
-  let now = dayjs();
   console.log(now.format("YYYY-MM-DD HH:mm:ss"));
-
-  const poolSchema = joi.object({
-    title: joi.string().required(),
-    expireAt: joi.string().allow("").default(now.format("YYYY-MM-DD HH:mm:ss")),
-  });
-
-  const { error } = poolSchema.validate(req.body, { abortEarly: false });
-  if (error) {
-    res.status(422).send(error.details.map((detail) => detail.message));
-    return;
-  }
 
   try {
     await db.collection("polls").insertOne({
