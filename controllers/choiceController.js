@@ -7,16 +7,7 @@ import { ObjectId } from "mongodb";
 export async function postChoice(req, res) {
   const { title, poolId } = req.body;
   let now = dayjs();
-
-  const choiceSchema = joi.object({
-    title: joi.string().required(),
-    poolId: joi.string().required(),
-  });
-  const { error } = choiceSchema.validate(req.body, { abortEarly: false });
-  if (error) {
-    console.log(error);
-    return res.sendStatus(422);
-  }
+  
   try {
     const pollExists = await db
       .collection("polls")
