@@ -1,6 +1,7 @@
 import express, { json } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import chalk from "chalk";
 
 import pollRouter from "../routes/pollRouter.js";
 import choiceRouter from "../routes/choiceRouter.js";
