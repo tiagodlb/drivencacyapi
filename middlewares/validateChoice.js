@@ -1,4 +1,4 @@
-import { choiceSchema } from "../schemas/choiceSchema";
+import { choiceSchema } from "../schemas/choiceSchema.js";
 
 export function validateChoice(req, res, next) {
   const { error } = choiceSchema.validate(req.body, { abortEarly: false });
