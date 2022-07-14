@@ -5,9 +5,10 @@ import db from "../src/db.js";
 
 export async function postPoll(req, res) {
   const { title, expireAt } = req.body;
+  const now = dayjs();
+
   console.log(now.format("YYYY-MM-DD HH:mm:ss"));
 
-  const now = dayjs();
 
   try {
     await db.collection("polls").insertOne({
