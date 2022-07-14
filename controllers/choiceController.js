@@ -5,8 +5,9 @@ import { ObjectId } from "mongodb";
 
 export async function postChoice(req, res) {
   const { title, poolId } = req.body;
+  poolId = ObjectId(poolId);
   let now = dayjs();
-  
+
   try {
     const pollExists = await db
       .collection("polls")
