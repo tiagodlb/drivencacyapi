@@ -1,4 +1,3 @@
-import joi from "joi";
 import dayjs from "dayjs";
 
 import db from "../src/db.js";
@@ -7,13 +6,14 @@ import { ObjectId } from "mongodb";
 export async function postChoice(req, res) {
   const { title, poolId } = req.body;
   let now = dayjs();
-  
+
   try {
     const pollExists = await db
       .collection("polls")
-      .findOne({ _id: new ObjectId(poolId) });
+      .findOne({ _id: ObjectId(poolId) });
     console.log(pollExists.expireAt);
-    if (!pollExists) {
+
+    if (!pollExists || pollExists === null) {
       return res.sendStatus(404);
     }
 
