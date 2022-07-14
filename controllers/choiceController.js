@@ -5,14 +5,12 @@ import { ObjectId } from "mongodb";
 
 export async function postChoice(req, res) {
   const { title, poolId } = req.body;
-  poolId = ObjectId(poolId);
   let now = dayjs();
 
   try {
     const pollExists = await db
       .collection("polls")
       .findOne({ _id: new ObjectId(poolId) });
-    console.log(pollExists);
 
     if (!pollExists || pollExists === null) {
       return res.sendStatus(404);
