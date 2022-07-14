@@ -7,10 +7,12 @@ export async function postChoice(req, res) {
   const { title, poolId } = req.body;
   let now = dayjs();
 
+  if(/[0-9a-fA-F]{24}/.test(poolId) === false) return res.sendStatus(404);
+
   try {
     const pollExists = await db
       .collection("polls")
-      .findOne({ _id: ObjectId(req.body.poolId) });
+      .findOne({ _id: ObjectId(poolId) });
 
     if (!pollExists || pollExists === null) {
       return res.sendStatus(404);
