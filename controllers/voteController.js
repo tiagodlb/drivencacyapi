@@ -41,7 +41,7 @@ export async function postChoiceIdVote(req, res) {
     const pollExists = await db
       .collection("polls")
       .findOne({ _id: ObjectId(voteExists.pollId) });
-    console.log(pollExists);
+    console.log(Exists.pollId);
 
     const data = pollExists.expireAt;
 
@@ -52,7 +52,6 @@ export async function postChoiceIdVote(req, res) {
     }
     
     let voteData = await db.collection("votes").findOne({choiceId: voteExists._id})
-    if(voteData) console.log("O Voto já existe!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     await db.collection("votes").insertOne({
       title: 1,
       pollId: voteExists.pollId,
