@@ -33,7 +33,7 @@ export async function postChoice(req, res) {
       .collection("choices")
       .findOne({ title: title });
     console.log(title, poolId);
-    console.log(titleExists.pollId + " AAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log({titleExists} + " AAAAAAAAAAAAAAAAAAAAAAAA");
 
     if (titleExists) {
       return res.sendStatus(409);
