@@ -29,14 +29,11 @@ export async function postChoice(req, res) {
 
     console.log(pollExpires);
 
-    const titleExists = await db
-      .collection("choices")
-      .find({$and: [
-          {title:  title},
-         { pollId: poolId}
-      ]
-      });
-    console.log(titleExists)
+    const titleExists = await db.collection("choices").find({
+      title: title,
+      pollId: poolId,
+    });
+    console.log(titleExists);
     if (titleExists) {
       return res.sendStatus(409);
     }
