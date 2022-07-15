@@ -31,14 +31,12 @@ export async function postChoice(req, res) {
 
     const titleExists = await db
       .collection("choices")
-      .findOne({ title: title });
-    const choicePollExists = await db
-      .collection("choices")
-      .findOne({ pollId: poolId });
-    console.log(title, poolId);
-    console.log({ titleExists } + " AAAAAAAAAAAAAAAAAAAAAAAA");
-
-    if (titleExists && choicePollExists) {
+      .find({
+        title: {$in: title},
+        pollId: {$in: poolId}
+      });
+    console.log(titleExists)
+    if (titleExists) {
       return res.sendStatus(409);
     }
 
