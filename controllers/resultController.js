@@ -7,15 +7,18 @@ export async function getResult(req, res) {
   if (/[0-9a-fA-F]{24}/.test(id) === false) return res.sendStatus(404); //Checks if the value is an hexadecimal number
 
   try {
-    const polls = await db
+    const pollExists = await db
       .collection("polls")
-      .findOne({ _id: new ObjectId(choices.pollId) });
-    if (!polls) return res.sendStatus(404);
+      .findOne({ _id: ObjectId(id) });
+    if (!pollExists) return res.sendStatus(404);
     const votes = await db.collection("votes").find({ pollId: id }).toArray();
     const specificVote = votes[0];
     const choices = await db
       .collection("choices")
       .findOne({ pollId: String(specificVote.pollId) });
+    const polls = await db
+      .collection("polls")
+      .findOne({ _id: new ObjectId(choices.pollId) });
     console.log(votes[0]);
     const results = await db.collection("results").insertOne({
       title: polls.title,
