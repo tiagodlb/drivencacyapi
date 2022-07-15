@@ -5,6 +5,8 @@ import dayjs from "dayjs";
 export async function getPollIdChoice(req, res) {
   const id = req.params.id;
 
+  if (/[0-9a-fA-F]{24}/.test(id) === false) return res.sendStatus(404); //Checks if the value is an hexadecimal number
+
   try {
     const polls = await db
       .collection("polls")
