@@ -29,7 +29,7 @@ export async function postChoice(req, res) {
 
     console.log(pollExpires);
 
-    const titleExists = await db.collection("choices").find({
+    const titleExists = await db.collection("choices").findOne({
       title: title,
       pollId: poolId,
     });
