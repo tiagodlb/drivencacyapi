@@ -41,7 +41,7 @@ export async function postChoiceIdVote(req, res) {
     const pollExists = await db
       .collection("polls")
       .findOne({ _id: ObjectId(voteExists.pollId) });
-    console.log(Exists.pollId);
+    console.log(voteExists.pollId);
 
     const data = pollExists.expireAt;
 
