@@ -12,7 +12,7 @@ export async function postChoice(req, res) {
   try {
     const pollExists = await db
       .collection("polls")
-      .findOne({ _id: (poolId) });
+      .findOne({ _id: ObjectId(poolId) });
 
     if (!pollExists) {
       //check if it exists
