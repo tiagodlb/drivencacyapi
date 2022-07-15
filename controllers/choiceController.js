@@ -32,10 +32,13 @@ export async function postChoice(req, res) {
     const titleExists = await db
       .collection("choices")
       .findOne({ title: title });
+    const choicePollExists = await db
+      .collection("choices")
+      .findOne({ pollId: poolId });
     console.log(title, poolId);
-    console.log({titleExists} + " AAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log({ titleExists } + " AAAAAAAAAAAAAAAAAAAAAAAA");
 
-    if (titleExists) {
+    if (titleExists && choicePollExists) {
       return res.sendStatus(409);
     }
 
