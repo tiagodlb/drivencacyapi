@@ -31,9 +31,10 @@ export async function postChoice(req, res) {
 
     const titleExists = await db
       .collection("choices")
-      .find({
-        title: {$in: title},
-        pollId: {$in: poolId}
+      .find({$and: [
+          {title:  title},
+         { pollId: poolId}
+      ]
       });
     console.log(titleExists)
     if (titleExists) {
