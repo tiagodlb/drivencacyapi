@@ -7,14 +7,15 @@ export async function postChoice(req, res) {
   const { title, poolId } = req.body;
   let now = dayjs();
 
-  if(/[0-9a-fA-F]{24}/.test(poolId) === false) return res.sendStatus(404);
+  if (/[0-9a-fA-F]{24}/.test(poolId) === false) return res.sendStatus(404); //Checks if the value is an hexadecimal number
 
   try {
     const pollExists = await db
       .collection("polls")
       .findOne({ _id: ObjectId(poolId) });
 
-    if (!pollExists || pollExists === null) {
+    if (!pollExists) {
+      //check if it exists
       return res.sendStatus(404);
     }
 
@@ -33,6 +34,7 @@ export async function postChoice(req, res) {
       .findOne({ title: title });
     console.log(title, poolId);
     console.log(titleExists);
+
     if (titleExists && pollExists) {
       return res.sendStatus(409);
     }

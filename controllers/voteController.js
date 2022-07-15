@@ -27,6 +27,9 @@ export async function getPollIdChoice(req, res) {
 export async function postChoiceIdVote(req, res) {
   const id = req.params.id;
   let now = dayjs();
+
+  if(/[0-9a-fA-F]{24}/.test(id) === false) return res.sendStatus(404); //Checks if the value is an hexadecimal number
+  
   try {
     let voteExists = await db.collection("choices").findOne({ _id: ObjectId(id) });
     if (!voteExists) {
