@@ -22,13 +22,12 @@ export async function postChoice(req, res) {
     const data = pollExists.expireAt;
 
     console.log("DATAAAAAA" + data);
-    console.log(pollExpires)
+    console.log(now);
 
     if (now.diff(data, "day") >= 30) {
       return res.sendStatus(403);
     }
 
-    console.log(now);
 
     const titleExists = await db.collection("choices").findOne({
       title: title,
