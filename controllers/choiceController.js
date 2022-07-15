@@ -21,11 +21,10 @@ export async function postChoice(req, res) {
 
     const data = pollExists.expireAt;
 
-    const pollExpires = now.add();
     console.log("DATAAAAAA" + data);
     console.log(pollExpires)
 
-    if (pollExpires.diff(data, "day") >= 30) {
+    if (now.diff(data, "day") >= 30) {
       return res.sendStatus(403);
     }
 
